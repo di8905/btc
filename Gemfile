@@ -40,6 +40,7 @@ gem 'twitter-bootstrap-rails'
 gem 'sidekiq'
 gem 'redis-rails'
 gem 'faraday'
+gem 'whenever'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
