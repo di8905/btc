@@ -1,0 +1,2 @@
+class BaseTicker < ApplicationRecord
+end
