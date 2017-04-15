@@ -19,6 +19,7 @@
 
 every 1.minute do
   runner "FetchDataJob.perform_later(UsdTicker.first)"
+  runner "FetchDataJob.perform_later(EurTicker.first)"
 end
 
 # Learn more: http://github.com/javan/whenever
