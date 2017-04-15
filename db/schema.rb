@@ -10,25 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170415124048) do
+ActiveRecord::Schema.define(version: 20170415101216) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "base_tickers", force: :cascade do |t|
+    t.string   "type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string   "type"
   end
 
   create_table "deals", force: :cascade do |t|
     t.decimal  "value",         precision: 10, scale: 5
     t.integer  "updated"
-    t.string   "dealdata_type"
-    t.integer  "dealdata_id"
+    t.string   "dealable_type"
+    t.integer  "dealable_id"
     t.datetime "created_at",                             null: false
     t.datetime "updated_at",                             null: false
-    t.index ["dealdata_type", "dealdata_id"], name: "index_deals_on_dealdata_type_and_dealdata_id", using: :btree
+    t.index ["dealable_type", "dealable_id"], name: "index_deals_on_dealable_type_and_dealable_id", using: :btree
   end
 
 end

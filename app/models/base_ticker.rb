@@ -1,5 +1,5 @@
 class BaseTicker < ApplicationRecord
-  has_many :deals, as: :dealdata
+  has_many :deals, as: :dealable
   FETCH_URL = ''
 
   def fetch_url
