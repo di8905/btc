@@ -1,13 +1,15 @@
 class FetchDataJob < ApplicationJob
   queue_as :default
 
-  def perform(ticker)
-    connection = Faraday.new(url: ticker.fetch_url)
+  def perform(deal_type)
+    deal_klass = deal_type.constantize
+    connection = Faraday.new(url: deal_klass::DATA_FETCH_URL)
+    byebug
     data = JSON.parse(connection.get.body)
-    last = data[ticker.data_path]['last']
-    updated = data[ticker.data_path]['updated']
+    last = data[deal_klass.data_path]['last']
+    updated = data[deal_klass.data_path]['updated']
     if last && updated
-      ticker.deals.create(value: last, updated: updated)
+      deal_klass.create(value: last, updated: updated)
     end
   end
 end
