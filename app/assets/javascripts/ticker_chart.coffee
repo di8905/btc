@@ -1,8 +1,4 @@
 
-@data = [{'time': 1, 'val': 1 },
-        {'time': 2, 'val': 2 },
-        {'time': 3, 'val': 1 },
-        {'time': 4, 'val': 1 }]
 
 @drawChart = (data) ->
   margin = { top: 30, right: 20, bottom: 30, left: 50 }
@@ -11,12 +7,12 @@
   parseDate = d3.time.format("%d-%b-%y").parse
 
   xScale = d3.scale.linear()
-                   .domain([d3.min(data, (d) -> return d.time),
-                            d3.max(data, (d) -> return d.time)])
+                   .domain([d3.min(data, (d) -> return d.updated),
+                            d3.max(data, (d) -> return d.updated)])
                    .range([0, width])
   yScale = d3.scale.linear()
-                   .domain([0,
-                            d3.max(data, (d) -> return d.val)])
+                   .domain([d3.min(data, (d) -> return d.value),
+                            d3.max(data, (d) -> return d.value)])
                    .range([height, 0])
 
   svg = d3.select(".chart")
@@ -29,9 +25,9 @@
 
   valueline = d3.svg.line()
                     .x( (d) ->
-                      return xScale(d.time))
+                      return xScale(d.updated))
                     .y( (d) ->
-                      return yScale(d.val) )
+                      return yScale(d.value) )
 
   svg.append("path")
     .attr("class", "line")

@@ -4,12 +4,19 @@ class FetchDataJob < ApplicationJob
   def perform(deal_type)
     deal_klass = deal_type.constantize
     connection = Faraday.new(url: deal_klass::DATA_FETCH_URL)
-    byebug
     data = JSON.parse(connection.get.body)
     last = data[deal_klass.data_path]['last']
     updated = data[deal_klass.data_path]['updated']
     if last && updated
       deal_klass.create(value: last, updated: updated)
     end
+    stream_data = { value: last, updated: updated }
+    ActionCable.server.broadcast('usd_ticker_stream', stream_data)
+  end
+
+  private
+
+  def publish_data
+
   end
 end
