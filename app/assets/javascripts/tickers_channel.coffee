@@ -1,6 +1,6 @@
 App.tickersChannel = App.cable.subscriptions.create 'TickersChannel',
   connected: ->
-    @installPageChangeCallback()
+    # @installPageChangeCallback()
     @followTickerStream()
     return
   received: (data) ->
