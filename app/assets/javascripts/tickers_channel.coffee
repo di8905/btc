@@ -2,6 +2,7 @@ App.tickersChannel = App.cable.subscriptions.create 'TickersChannel',
   connected: ->
     # @installPageChangeCallback()
     @followTickerStream()
+
     return
   received: (data) ->
     chartData.push(data)
@@ -13,6 +14,7 @@ App.tickersChannel = App.cable.subscriptions.create 'TickersChannel',
   followTickerStream: ->
     if $('#ticker-type').length
       type = $('#ticker-type').data('type')
+      $('.' + type + '-ticker-button').addClass('active')
       @perform 'subscribe_ticker_stream', type: type
     else
       @perform 'unsubscribe_ticker_stream'

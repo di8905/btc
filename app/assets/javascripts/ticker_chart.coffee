@@ -1,18 +1,12 @@
 
 
 @drawChart = (data) ->
-  margin = { top: 30, right: 20, bottom: 30, left: 60 }
+  margin = { top: 30, right: 20, bottom: 30, left: 80 }
   width = 800 - margin.left - margin.right
   height = 300 - margin.top - margin.bottom
-  toDate = (epoh) -> return new Date(epoh * 1000)
-  data.forEach( (d) ->
-              d.value = +d.value
-              d.updated = toDate(d.updated)
-              )
 
   xScale = d3.time.scale()
-                   .domain([d3.min(data, (d) -> return d.updated),
-                            d3.max(data, (d) -> return d.updated)])
+                   .domain(d3.extent(data, (d) -> return new Date(d.updated )))
                    .range([0, width])
 
   yScale = d3.scale.linear()
@@ -21,6 +15,7 @@
                    .range([height, 0])
 
   xAxis = d3.svg.axis().scale(xScale)
+          .tickFormat(d3.time.format("%H:%M"))
 	        .orient("bottom").ticks(5);
 
   yAxis = d3.svg.axis().scale(yScale)
