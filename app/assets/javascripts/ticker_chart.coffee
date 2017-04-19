@@ -1,8 +1,8 @@
 
 
 @drawChart = (data) ->
-  margin = { top: 30, right: 20, bottom: 30, left: 80 }
-  width = 800 - margin.left - margin.right
+  margin = { top: 30, right: 20, bottom: 30, left: 100 }
+  width = 900 - margin.left - margin.right
   height = 300 - margin.top - margin.bottom
 
   xScale = d3.time.scale()
