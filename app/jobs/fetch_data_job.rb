@@ -13,10 +13,4 @@ class FetchDataJob < ApplicationJob
     stream_data = { value: last, updated: updated }
     ActionCable.server.broadcast(deal_type, stream_data)
   end
-
-  private
-
-  def publish_data
-
-  end
 end

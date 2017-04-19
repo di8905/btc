@@ -4,16 +4,21 @@ html
     title
       | Btc
     = csrf_meta_tags
-    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
-    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
-    = javascript_include_tag 'https://d3js.org/d3.v3.min.js', 'data-turbolinks-track': 'reload'
+    = stylesheet_link_tag    'application', media: 'all'
+    = javascript_include_tag 'application'
+    = javascript_include_tag 'https://d3js.org/d3.v3.min.js'
   body
     .menu
       ul.ticker-menu
         li 
-          =link_to 'BTC-USD', root_path, class: 'usd-ticker-button'
+          =link_to 'BTC-USD', usd_ticker_path, class: 'usd-ticker-button'
         li 
-          =link_to 'BTC-EUR', root_path, class: 'eur-ticker-button'
+          =link_to 'BTC-EUR', eur_ticker_path, class: 'eur-ticker-button'
         li 
-          =link_to 'BTC-RUR', root_path, class: 'rur-ticker-button'
+          =link_to 'BTC-RUR', rur_ticker_path, class: 'rur-ticker-button'
     = yield
+    
+    script
+      | this.chartData = #{@deals.to_json(only: [:updated, :value]).html_safe}
+
+    .chart

@@ -1,7 +1,1 @@
 h4#ticker-type data-type='usd' USD ticker
-
-script
-  | this.chartData = #{@deals.to_json(only: [:updated, :value]).html_safe}
-
-.chart
-  

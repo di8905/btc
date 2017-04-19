@@ -48,4 +48,4 @@
         .attr("class", "y axis")
         .call(yAxis)
 
-$(document).on("turbolinks:load", -> drawChart(chartData))
+$(document).ready( -> drawChart(chartData))
