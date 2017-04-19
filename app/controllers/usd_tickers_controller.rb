@@ -1,5 +1,5 @@
 class UsdTickersController < ApplicationController
   def show
-    @deals = UsdDeal.all
+    @deals = UsdDeal.all.order(:updated)
   end
 end

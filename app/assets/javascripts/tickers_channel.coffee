@@ -4,7 +4,7 @@ App.tickersChannel = App.cable.subscriptions.create 'TickersChannel',
     @followTickerStream()
     return
   received: (data) ->
-    console.log('ququ received')
+    
     return
 
   followTickerStream: ->
