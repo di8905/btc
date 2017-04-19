@@ -4,7 +4,10 @@ App.tickersChannel = App.cable.subscriptions.create 'TickersChannel',
     @followTickerStream()
     return
   received: (data) ->
-    
+    chartData.push(data)
+    chartData.shift()
+    $('.chart').html('')
+    drawChart(chartData)
     return
 
   followTickerStream: ->

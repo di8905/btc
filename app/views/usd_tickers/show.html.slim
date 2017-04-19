@@ -1,10 +1,7 @@
 h4#ticker-type data-type='usd_deal' USD deals
 
 script
-  | this.data = #{@deals.to_json(only: [:updated, :value]).html_safe}
+  | this.chartData = #{@deals.to_json(only: [:updated, :value]).html_safe}
 
 .chart
   
--@deals.each do |deal|
- p
-  =deal.value
