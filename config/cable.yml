@@ -8,4 +8,5 @@ test:
 
 production:
   adapter: redis
-  url: redis://localhost:6379/1
+  url: 'redis://redistogo:758127c3d3b17fcb2e1fff504793d52e@chubb.redistogo.com:9317/'
+  password: '758127c3d3b17fcb2e1fff504793d52e'
