@@ -5,8 +5,9 @@
   width = 900 - margin.left - margin.right
   height = 300 - margin.top - margin.bottom
 
+
   xScale = d3.time.scale()
-                   .domain(d3.extent(data, (d) -> return new Date(d.updated )))
+                   .domain(d3.extent(data, (d) -> return new Date(d.updated * 1000 )))
                    .range([0, width])
 
   yScale = d3.scale.linear()
@@ -15,7 +16,7 @@
                    .range([height, 0])
 
   xAxis = d3.svg.axis().scale(xScale)
-          .tickFormat(d3.time.format("%H:%M"))
+
 	        .orient("bottom").ticks(5);
 
   yAxis = d3.svg.axis().scale(yScale)
@@ -31,7 +32,7 @@
 
   valueline = d3.svg.line()
                     .x( (d) ->
-                      return xScale(d.updated))
+                      return xScale(d.updated * 1000))
                     .y( (d) ->
                       return yScale(d.value) )
 
