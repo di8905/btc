@@ -3,8 +3,12 @@ class FetchDataJob < ApplicationJob
 
   def perform(deal_type)
     deal_klass = deal_type.camelize.constantize
-    connection = Faraday.new(url: deal_klass::DATA_FETCH_URL)
-    data = JSON.parse(connection.get.body)
+    begin
+      connection = Faraday.new(url: deal_klass::DATA_FETCH_URL)
+      data = JSON.parse(connection.get.body)
+    rescue Faraday::Error::ConnectionFailed
+      return
+    end
     last = data[deal_klass.data_path]['last']
     updated = data[deal_klass.data_path]['updated']
     if last && updated
